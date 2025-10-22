@@ -1,4 +1,4 @@
-
+n
 {
   "name": "lucifer-chatbot",
   "version": "1.0.0",
@@ -11,14 +11,16 @@
     "start": "electron .",
     "dev": "cross-env NODE_ENV=development electron .",
     "build": "electron-builder",
-    "build:win": "npm run build:resources && electron-builder --win",
+
+    "build:win": "node scripts/check-win-deps.js && npm run build:resources && electron-builder --win",
+
     "build:resources": "npm run build:frontend && npm run install:backend",
     "build:frontend": "npm --prefix ../frontend install && npm --prefix ../frontend run build",
     "install:backend": "npm --prefix ../backend install --omit=dev",
     "postinstall": "electron-builder install-app-deps",
     "prebuild": "npm run build:resources"
   },
-
+n
   "dependencies": {
     "axios": "^1.7.0",
     "electron-store": "^9.0.0"
@@ -42,13 +44,25 @@
       "buildResources": "assets"
     },
     "extraResources": [
-      { "from": "../backend", "to": "backend" },
-      { "from": "../frontend/dist", "to": "frontend" }
+
+      {
+        "from": "../backend",
+        "to": "backend"
+      },
+      {
+        "from": "../frontend/dist",
+        "to": "frontend"
+      }
     ],
-    "mac": { "category": "public.app-category.utilities" },
-    "win": { "target": "nsis", "icon": "assets/icon.ico" },
-    "linux": { "target": "AppImage", "icon": "assets" }
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }
-
 

@@ -10,6 +10,11 @@ function hasBinary(cmd) {
   }
 }
 
+function hasAnyBinary(candidates) {
+  return candidates.some(hasBinary);
+}
+
+
 if (process.platform === 'win32') {
   process.exit(0);
 }
@@ -25,9 +30,14 @@ if ((process.platform === 'linux' || process.platform === 'darwin') && !hasBinar
   missing.push('mono');
 }
 
+if (!hasAnyBinary(['7z', '7za'])) {
+  missing.push('p7zip (7z/7za)');
+}
+
 if (missing.length > 0) {
   console.error(`\nFehlende Abhängigkeiten für Windows-Builds: ${missing.join(', ')}`);
-  console.error('Installiere die oben genannten Pakete (z. B. `sudo apt install wine mono-complete`) oder führe den Build unter Windows aus.');
+  console.error('Installiere die oben genannten Pakete (z. B. `sudo apt install wine mono-complete p7zip-full`) oder führe den Build unter Windows aus.');
+n
   console.error('Weitere Hinweise findest du im README unter "Windows-Installer (.exe) bauen".');
   process.exit(1);
 }
