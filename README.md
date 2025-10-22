@@ -40,6 +40,7 @@ Die Electron-Shell startet automatisch das Node.js-Backend im Hintergrund und l�
 
 > ⚠️ **Voraussetzungen:** Auf Windows kannst du den Installer direkt bauen. Unter Linux/macOS benötigst du zusätzlich `wine` und `mono`, damit `electron-builder` die Windows-Binaries erzeugen kann (z. B. `sudo apt install wine mono-complete`). Ohne diese Tools bricht der Build mit `ERR_ELECTRON_BUILDER_CANNOT_EXECUTE` ab. Das Skript `npm --prefix electron run build:win` prüft die Abhängigkeiten vor dem eigentlichen Build und weist dich bei fehlenden Tools darauf hin.
 
+
 1. Stelle sicher, dass alle Abhängigkeiten installiert sind:
    ```bash
    npm --prefix backend install
@@ -54,6 +55,8 @@ Die Electron-Shell startet automatisch das Node.js-Backend im Hintergrund und l�
 Der Befehl kompiliert das React-Frontend, installiert die Backend-Abhängigkeiten ohne Dev-Dependencies und verpackt alles mit `electron-builder` zu einer `.exe` (NSIS-Installer). Die Ausgabe findest du im Ordner `electron/dist`. Beim Start der Anwendung wird der Backend-Server automatisch mitgestartet und beim Beenden sauber beendet.
 
 > 💡 Möchtest du ein eigenes App-Icon verwenden, lege deine Dateien vor dem Build in `electron/assets/` ab (`icon.ico` für Windows, optional `icon.png`/`icon.icns` für andere Plattformen). Dieses Repository enthält bewusst keine Binär-Assets – du kannst deine eigenen Icon-Dateien hinzufügen, sie werden aber dank `.gitignore` nicht eingecheckt.
+
+Die Electron-Shell lädt das gebaute Frontend (`frontend/dist`). Führe zuvor `npm run build` im Frontend-Ordner aus. Während der Entwicklung kannst du auch das Vite-Dashboard separat im Browser nutzen.
 
 ## 🔧 Umgebungsvariablen
 Lege im jeweiligen Projektordner eine `.env`-Datei an (siehe `.env.example`, wenn vorhanden):
@@ -80,5 +83,8 @@ Der Twitch-Bot reagiert auf gespeicherte Befehle (`!hello`) sowie auf `!setcomma
 - Node.js ≥ 18 wird empfohlen.
 - Datenbankdateien und `node_modules` sind per `.gitignore` ausgenommen.
 - Nach Änderungen am Frontend erstellt `npm --prefix electron run build:win` automatisch ein frisches Build. Für ein manuelles Frontend-Build genügt `npm --prefix frontend run build`.
+
+- Nach Änderungen am Frontend `npm run build` ausführen, bevor du Electron packst (`npm run build` im electron-Ordner benutzt `electron-builder`).
+ 
 
 Viel Spaß beim Experimentieren mit dem Lucifer Chatbot! 👾

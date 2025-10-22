@@ -9,6 +9,7 @@ backend/chatbot.db
 .env
 /.idea/
 .vscode/
+
 electron/assets/*.ico
 electron/assets/*.icns
 electron/assets/*.png
