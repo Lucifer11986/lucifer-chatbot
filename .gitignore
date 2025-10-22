@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.log
+*.sqlite
+*.db
+.DS_Store
+frontend/dist/
+backend/chatbot.db
+.env
+/.idea/
+.vscode/
