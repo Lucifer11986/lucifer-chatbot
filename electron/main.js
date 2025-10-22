@@ -82,7 +82,13 @@ function resolveFrontendPath() {
     return process.env.ELECTRON_START_URL || "http://localhost:5173";
   }
 
-  return path.join(process.resourcesPath, "frontend", "dist", "index.html");
+  const packagedIndex = path.join(process.resourcesPath, "frontend", "dist", "index.html");
+
+  if (fs.existsSync(packagedIndex)) {
+    return packagedIndex;
+  }
+
+  return path.join(__dirname, "../frontend/dist/index.html");
 }
 
 function createWindow() {

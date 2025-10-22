@@ -35,12 +35,15 @@
       "node_modules/",
       "package.json"
     ],
+    "directories": {
+      "buildResources": "assets"
+    },
     "extraResources": [
       { "from": "../backend", "to": "backend" },
       { "from": "../frontend/dist", "to": "frontend" }
     ],
     "mac": { "category": "public.app-category.utilities" },
-    "win": { "target": "nsis" },
-    "linux": { "target": "AppImage" }
+    "win": { "target": "nsis", "icon": "assets/icon.ico" },
+    "linux": { "target": "AppImage", "icon": "assets" }
   }
 }
