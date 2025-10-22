@@ -89,6 +89,7 @@ function resolveFrontendPath() {
   }
 
 =======
+=======
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
@@ -96,6 +97,7 @@ function resolveFrontendPath() {
   if (!app.isPackaged) {
     return process.env.ELECTRON_START_URL || "http://localhost:5173";
   }
+
 
   return path.join(__dirname, "../frontend/dist/index.html");
 }
@@ -128,6 +130,9 @@ function createWindow() {
 
 app.whenReady().then(() => {
   startBackend();
+ codex/update-project-structure-and-dependencies
+
+
 
   createWindow();
   app.on("activate", () => {
