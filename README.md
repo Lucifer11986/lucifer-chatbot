@@ -34,6 +34,22 @@ cd electron
 npm install
 npm run dev
 ```
+Die Electron-Shell startet automatisch das Node.js-Backend im Hintergrund und lädt im Entwicklungsmodus das Vite-Frontend unter `http://localhost:5173`. Während der Entwicklung kannst du auch das Vite-Dashboard separat im Browser nutzen.
+
+## 💾 Windows-Installer (.exe) bauen
+1. Stelle sicher, dass alle Abhängigkeiten installiert sind:
+   ```bash
+   npm --prefix backend install
+   npm --prefix frontend install
+   npm --prefix electron install
+   ```
+2. Erzeuge anschließend den Windows-Installer:
+   ```bash
+   npm --prefix electron run build:win
+   ```
+
+Der Befehl kompiliert das React-Frontend, installiert die Backend-Abhängigkeiten ohne Dev-Dependencies und verpackt alles mit `electron-builder` zu einer `.exe` (NSIS-Installer). Die Ausgabe findest du im Ordner `electron/dist`. Beim Start der Anwendung wird der Backend-Server automatisch mitgestartet und beim Beenden sauber beendet.
+=======
 Die Electron-Shell lädt das gebaute Frontend (`frontend/dist`). Führe zuvor `npm run build` im Frontend-Ordner aus. Während der Entwicklung kannst du auch das Vite-Dashboard separat im Browser nutzen.
 
 ## 🔧 Umgebungsvariablen
@@ -60,6 +76,9 @@ Der Twitch-Bot reagiert auf gespeicherte Befehle (`!hello`) sowie auf `!setcomma
 ## 🛠️ Entwicklungstipps
 - Node.js ≥ 18 wird empfohlen.
 - Datenbankdateien und `node_modules` sind per `.gitignore` ausgenommen.
+- Nach Änderungen am Frontend erstellt `npm --prefix electron run build:win` automatisch ein frisches Build. Für ein manuelles Frontend-Build genügt `npm --prefix frontend run build`.
+=======
 - Nach Änderungen am Frontend `npm run build` ausführen, bevor du Electron packst (`npm run build` im electron-Ordner benutzt `electron-builder`).
+ 
 
 Viel Spaß beim Experimentieren mit dem Lucifer Chatbot! 👾

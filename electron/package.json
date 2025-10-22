@@ -10,8 +10,14 @@
     "start": "electron .",
     "dev": "cross-env NODE_ENV=development electron .",
     "build": "electron-builder",
-    "postinstall": "electron-builder install-app-deps"
+    "build:win": "npm run build:resources && electron-builder --win",
+    "build:resources": "npm run build:frontend && npm run install:backend",
+    "build:frontend": "npm --prefix ../frontend install && npm --prefix ../frontend run build",
+    "install:backend": "npm --prefix ../backend install --omit=dev",
+    "postinstall": "electron-builder install-app-deps",
+    "prebuild": "npm run build:resources"
   },
+
   "dependencies": {
     "axios": "^1.7.0",
     "electron-store": "^9.0.0"
@@ -21,6 +27,7 @@
     "electron-builder": "^24.13.3",
     "cross-env": "^7.0.3"
   },
+
   "build": {
     "appId": "de.lucifer.chatbot",
     "productName": "Lucifer Chatbot",
@@ -42,3 +49,4 @@
     "linux": { "target": "AppImage", "icon": "assets" }
   }
 }
+
