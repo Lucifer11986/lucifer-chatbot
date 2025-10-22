@@ -88,6 +88,15 @@ function resolveFrontendPath() {
     return packagedIndex;
   }
 
+=======
+const { app, BrowserWindow } = require("electron");
+const path = require("path");
+
+function resolveFrontendPath() {
+  if (!app.isPackaged) {
+    return process.env.ELECTRON_START_URL || "http://localhost:5173";
+  }
+
   return path.join(__dirname, "../frontend/dist/index.html");
 }
 
@@ -119,6 +128,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
   startBackend();
+
   createWindow();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -135,3 +145,4 @@ app.on("before-quit", () => {
     backendProcess.kill("SIGTERM");
   }
 });
+
